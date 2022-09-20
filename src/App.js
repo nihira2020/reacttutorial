@@ -13,13 +13,18 @@ function App() {
     { 'id': '4', 'title': 'jQuery', 'desc': 'this content described about jQuery', 'author': 'rishan' },
     { 'id': '5', 'title': 'sql', 'desc': 'this content described about Sql', 'author': 'rishan' }
   ]);
+  const FunctionDelete = (id) => {
+    const newlist = blogdata.filter(item => item.id != id);
+    change(newlist)
+
+  }
   return (
     <div className="App">
       <header className="App-header">
         <AppHeader title="Welcome Nihira Techiees" course={couse}></AppHeader>
         {/* <Bloglist blog={blogdata.filter(item=>item.author=='rishan')} author="Author is Rishan" />
         <Bloglist blog={blogdata.filter(item=>item.author=='jhon')} author="Author is Jhon" /> */}
-        <Bloglist blog={blogdata} author="All blogs"  />
+        <Bloglist blog={blogdata} author="All blogs" FunctionDelete={FunctionDelete} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
