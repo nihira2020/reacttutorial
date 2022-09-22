@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import AppHeader from './Appheader';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Bloglist from './Bloglist';
 
 function App() {
@@ -13,11 +13,18 @@ function App() {
     { 'id': '4', 'title': 'jQuery', 'desc': 'this content described about jQuery', 'author': 'rishan' },
     { 'id': '5', 'title': 'sql', 'desc': 'this content described about Sql', 'author': 'rishan' }
   ]);
+  const[header,headchange]=useState("React class");
   const FunctionDelete = (id) => {
-    const newlist = blogdata.filter(item => item.id != id);
-    change(newlist)
+    // const newlist = blogdata.filter(item => item.id != id);
+    // change(newlist)
+    headchange("React");
+
+    console.log(header)
 
   }
+  useEffect(()=>{
+    console.log('use effect');
+  },[blogdata,header])
   return (
     <div className="App">
       <header className="App-header">
