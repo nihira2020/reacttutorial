@@ -38,6 +38,9 @@ table{
 td{
   border: 2px solid #fff;
 }
+.errormessage{
+  color:red;
+}
 
 @keyframes App-logo-spin {
   from {

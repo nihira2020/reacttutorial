@@ -4,6 +4,7 @@ import AppHeader from './Appheader';
 import { useState, useEffect } from 'react';
 import Bloglist from './Bloglist';
 import Company from './Company';
+import useFetch from './useFetch';
 
 function App() {
   const couse = "React js"
@@ -15,34 +16,46 @@ function App() {
     { 'id': '5', 'title': 'sql', 'desc': 'this content described about Sql', 'author': 'rishan' }
   ]);
   const [header, headchange] = useState("React class");
-  const [companydata, campanychange] = useState(null);
-  const [isloaded, changeload] = useState(true);
+  // const [companydata, campanychange] = useState(null);
+  // const [isloaded, changeload] = useState(true);
+  // const [errorinfo, SetError] = useState(null);
   const FunctionDelete = (id) => {
-    // const newlist = blogdata.filter(item => item.id != id);
-    // change(newlist)
+    const newlist = blogdata.filter(item => item.id != id);
+    change(newlist)
     headchange("React");
 
 
   }
-  useEffect(() => {
+  
+  // useEffect(() => {
 
-    fetch("http://localhost:8000/company").then(res => {
-      return res.json();
-    }).then(result => {
-      //setTimeout(() => {
-        campanychange(result);
-        changeload(false);
-     // },3000);
-    })
+  //   fetch("http://localhost:8000/company").then(res => {
+  //     console.log(res);
+  //     if (!res.ok) {
+  //       throw Error('Failed to fatch the data');
+  //     }
+  //     return res.json();
+  //   }).then(result => {
+  //     setTimeout(() => {
+  //       campanychange(result);
+  //       changeload(false);
+  //     }, 3000);
+  //   }).catch(res => {
+  //     SetError(res.message);
+  //     changeload(false);
+  //   })
 
-  }, [])
+  // }, [])
+  const{data : companydata,isloaded,errorinfo}=useFetch('http://localhost:8000/company');
   return (
     <div className="App">
       <header className="App-header">
         <AppHeader title="Welcome Nihira Techiees" course={couse}></AppHeader>
+
         {/* <Bloglist blog={blogdata.filter(item=>item.author=='rishan')} author="Author is Rishan" />
         <Bloglist blog={blogdata.filter(item=>item.author=='jhon')} author="Author is Jhon" /> */}
         {/* <Bloglist blog={blogdata} author="All blogs" FunctionDelete={FunctionDelete} /> */}
+        {errorinfo && <div className='errormessage'>{errorinfo}</div>}
         {isloaded && <div>Please Wait .....</div>}
         {companydata && <Company companydata={companydata}></Company>}
         <img src={logo} className="App-logo" alt="logo" />
